@@ -1,0 +1,40 @@
+{
+  "name": "yeshua-obi-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "node scripts/prepare-images.mjs && next build",
+    "start": "next start --hostname 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "test:e2e": "playwright test",
+    "import:assets": "node scripts/import-assets.mjs",
+    "prepare:previews": "node scripts/prepare-previews.mjs",
+    "build:review": "node scripts/build-review.mjs",
+    "publish:review": "node scripts/publish-review.mjs",
+    "prepare:images": "node scripts/prepare-images.mjs",
+    "build:static": "node scripts/build-static.mjs",
+    "check:seo": "node scripts/audit-static.mjs"
+  },
+  "dependencies": {
+    "@fontsource/caveat": "5.3.0",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@fontsource/inter": "5.3.0",
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "sharp": "0.35.5",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

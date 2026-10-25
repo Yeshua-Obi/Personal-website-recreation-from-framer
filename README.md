@@ -1,0 +1,57 @@
+# Yeshua Obi — personal portfolio
+
+A Next.js portfolio for Yeshua Obi, Brand & Systems Designer / The Creative Nomad. It contains Home, Work, About, Manual, Contact, eleven published case studies and four project-category collections.
+
+## Development
+
+Use Node 24 and npm.
+
+```sh
+npm ci
+npm run dev
+```
+
+`npm run prepare:images` prepares responsive WebP variants and the logo icons. Builds run it automatically and reuse the cached files. Source photographs and native preview clips are included. Large original film files can be imported for local server development with `npm run import:assets`; they are excluded from Git. Static builds use their existing public source URLs until the CMS media migration is complete.
+
+## Checks
+
+```sh
+npm test
+npm run typecheck
+npm run test:e2e -- --workers=1
+```
+
+For a production-domain SEO check:
+
+```sh
+SITE_URL=https://your-real-domain.com npm run build:static
+SITE_URL=https://your-real-domain.com npm run check:seo
+```
+
+## Cloudflare Pages
+
+Connect this repository's `main` branch in Cloudflare Pages:
+
+- Framework preset: None (the app exports a static site).
+- Root directory: repository root.
+- Build command: `npm run build:static`.
+- Output directory: `out`.
+- Node version: 24.
+- Leave `SITE_URL` empty for the temporary address and preview deployments. This keeps them excluded from indexing. Cloudflare supplies `CF_PAGES_URL` for share-image URLs.
+- Set `SITE_URL` to the final HTTPS origin once the selected domain is purchased, connected and ready for indexing. `GOOGLE_SITE_VERIFICATION` can hold the owner's real Search Console verification value.
+
+The export generates clean URLs, caching/security headers, legacy project redirects and crawler rules. The large film originals remain on their existing public asset host until migration to owned CMS storage; complete that migration before retiring the Framer site.
+
+`wrangler.json` provides the intended Pages project name and output directory for a direct CLI deployment. Cloudflare authentication is required before creating/deploying that project.
+
+## Content
+
+Project records are in `src/content/projects.json`; site identity and biography are in `src/content/site.json`. Publication and homepage visibility use shared selectors. The homepage count derives from the same records as the grid, with three columns on desktop. V320 is published in Work and excluded from Home. Category membership is explicit.
+
+The CMS connection follows hosting. Preserve project slugs, credits, disclosures, categories, ordering and homepage visibility during import. Use real provider project/dataset IDs and keep write credentials in authenticated CLI/build environments.
+
+## Review deployment
+
+`npm run publish:review` publishes the separate GitHub Pages review from generated output to `gh-pages`. It preserves the source branch and working index. Review pages remain noindex. The production source is on `main`.
+
+The site uses the owner's actual crown/JO mark, self-hosted Inter / IBM Plex Mono / Caveat and the established paper, ink, dusty-blue, lilac and teal palette. The existing design and public case-study content are retained. Private working notes stay in the ignored `docs/` folder.

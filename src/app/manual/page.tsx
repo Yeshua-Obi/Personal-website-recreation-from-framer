@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { ActionLink, ContactSection, SectionTitle } from "@/components/site-ui";
+import { ActionLink, SectionTitle } from "@/components/site-ui";
+import { ContactSection } from "@/components/site-sections";
 import { pageMetadata } from "@/lib/seo";
-import site from "@/content/site.json";
+import { getSiteContent } from "@/lib/content";
 
 export const metadata: Metadata = pageMetadata("A Personal Manual — Practice & Interests", "Yeshua Obi’s personal manual: curiosity, creative practice, visual storytelling and the interests that shape his work as a Brand & Systems Designer.", "/manual");
 
@@ -11,7 +12,8 @@ const interests = [
   { number: "03", title: "Tools as a playground.", text: "AI workflows and creative technology give me more ways to explore an idea. The part I keep coming back to is the thinking: what the idea needs, how it feels, and whether it holds meaning.", href: "/portfolio/saka", link: "An experiment in the work" },
 ];
 
-export default function ManualPage() {
+export default async function ManualPage() {
+  const site = await getSiteContent();
   return <main id="main">
     <section className="page-intro manual-intro shell"><p className="eyebrow">PERSON / A personal manual</p><h1>A person before<br /><span className="annotated">a portfolio.<svg viewBox="0 0 500 30" preserveAspectRatio="none" aria-hidden="true"><path d="M5 17Q240 1 495 13" /></svg></span></h1><div className="page-intro-bottom"><p>A few things about how I see, think and make.<br />Some professional. Some just personal.</p><span className="handwritten">a manual, not a rulebook.</span></div></section>
     <section className="manual-outlook shell"><SectionTitle number="01">A way of seeing</SectionTitle><div className="manual-reading"><h2>Curious first.<br /><span className="muted">Careful with the details.</span></h2>{site.biography.map((paragraph, index) => <p key={index}>{paragraph}</p>)}<blockquote className="personal-note">{site.personalNote}</blockquote></div></section>

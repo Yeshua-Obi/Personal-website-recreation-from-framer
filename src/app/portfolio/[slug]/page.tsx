@@ -2,7 +2,8 @@ import { SourceImage } from "@/components/source-image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getProject, getPublishedProjects, projectHref, projectSummary } from "@/lib/projects";
+import { projectHref, projectSummary } from "@/lib/projects";
+import { getProject, getPublishedProjects } from "@/lib/content";
 import { pageMetadata, projectSchema, breadcrumbSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
 import { imageVariantUrl } from "@/lib/image-variants";
@@ -10,20 +11,20 @@ import { mediaUrl } from "@/lib/media";
 import { ActionLink, Arrow, SectionTitle } from "@/components/site-ui";
 
 export const dynamicParams = false;
-export function generateStaticParams() { return getPublishedProjects().map(({ slug }) => ({ slug })); }
+export async function generateStaticParams() { return (await getPublishedProjects()).map(({ slug }) => ({ slug })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   if (!project) return { title: "Project not found", robots: { index: false, follow: false } };
   return pageMetadata(project.title, projectSummary(project), projectHref(slug));
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   if (!project) notFound();
-  const projects = getPublishedProjects();
+  const projects = await getPublishedProjects();
   const next = projects[(projects.findIndex(p => p.slug === slug) + 1) % projects.length];
   const image = project.image ? mediaUrl(project.image) : undefined;
   return <main id="main" className="project-page">
@@ -31,6 +32,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     {image && <div className="case-cover shell"><SourceImage src={image} alt={`${project.title} — project overview`} fill preload sizes="(max-width: 1300px) 95vw, 1280px" unoptimized={image.startsWith("https:")} /></div>}
     <article className="case-content shell"><section className="case-section"><SectionTitle number="I">Project Overview</SectionTitle><p className="case-overview">{project.description}</p></section>
       {project.film && <div className="case-film"><video src={mediaUrl(project.film)} poster={image ? imageVariantUrl(image, 1600) : undefined} controls playsInline preload="none" aria-label={`${project.title} project film`} /><p>{project.title} / Film & motion</p></div>}
+      {!project.sections?.length && project.content.filter(paragraph => paragraph.trim() && paragraph.trim() !== project.description.trim()).map((paragraph, index) => <section className="case-section" key={`story-${index}`}><p>{paragraph}</p></section>)}
       {project.sections?.map((section, index) => <section className="case-section" key={`${section.heading}-${index}`}><h2>{section.heading}</h2>{section.paragraphs.map((paragraph, p) => <p key={p}>{paragraph}</p>)}</section>)}
       <div className="case-gallery">{project.gallery?.map((asset, i) => { const src = mediaUrl(asset.src); return <figure key={asset.src}><SourceImage src={src} alt={asset.alt} width={asset.width} height={asset.height} sizes="(max-width: 800px) 95vw, 85vw" loading="lazy" unoptimized={src.startsWith("https:")} /><figcaption>{project.title} / {String(i + 1).padStart(2,"0")}</figcaption></figure>; })}</div>
     </article>

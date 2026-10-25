@@ -2,20 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Gallery } from "@/components/gallery";
 import { FeaturedReel } from "@/components/featured-reel";
-import { ActionLink, Arrow, ContactSection, SectionTitle } from "@/components/site-ui";
-import { getHomepageProjects, toProjectPreview } from "@/lib/projects";
+import { ActionLink, Arrow, SectionTitle } from "@/components/site-ui";
+import { ContactSection } from "@/components/site-sections";
+import { toProjectPreview } from "@/lib/projects";
+import { getHomepageProjects, getSiteContent } from "@/lib/content";
 import { getSiteUrl } from "@/lib/site";
-import site from "@/content/site.json";
 import { categoryHref, projectCategories } from "@/lib/project-categories";
 
 export const metadata: Metadata = { alternates: { canonical: getSiteUrl() || undefined } };
 
-export default function Home() {
-  const projects = getHomepageProjects();
+export default async function Home() {
+  const [projects, site] = await Promise.all([getHomepageProjects(), getSiteContent()]);
   return <main id="main">
 
     <section className="editorial-hero shell" aria-labelledby="hero-title">
-      <div className="hero-copy"><p className="eyebrow">Personal practice / The Creative Nomad</p><h1 id="hero-title">Yeshua<br /><span>Obi.</span></h1><div className="hero-position"><h2>Brand &<br /><span className="circled-word">Systems<svg viewBox="0 0 300 90" preserveAspectRatio="none" aria-hidden="true"><path d="M287 29C275 0 51-6 14 27S15 83 139 82 302 65 286 35C272 12 57 7 22 28" /></svg><svg className="mobile-hero-arrow" viewBox="0 0 100 34" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M94 12Q58 24 2 19M14 7Q7 13 2 19L15 29" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" /></svg></span> Designer.</h2><span className="handwritten mobile-hero-note" aria-hidden="true">brand → systems</span><span className="handwritten hero-note">brand <span className="hero-note-divider" aria-hidden="true">→</span> systems<br /><svg viewBox="0 0 120 60" fill="none" aria-hidden="true"><path d="M112 5Q72 53 8 44m13-9L6 44l13 11" /></svg></span></div><p className="hero-description">I design digital products, AI workflows, and visual systems that turn complex ideas into clear, useful experiences.</p><Link className="text-link" href="#work">Explore the work <Arrow direction="down" /></Link></div>
+      <div className="hero-copy"><p className="eyebrow">Personal practice / The Creative Nomad</p><h1 id="hero-title">Yeshua<br /><span>Obi.</span></h1><div className="hero-position"><h2>Brand &<br /><span className="circled-word">Systems<svg viewBox="0 0 300 90" preserveAspectRatio="none" aria-hidden="true"><path d="M287 29C275 0 51-6 14 27S15 83 139 82 302 65 286 35C272 12 57 7 22 28" /></svg><svg className="mobile-hero-arrow" viewBox="0 0 100 34" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M94 12Q58 24 2 19M14 7Q7 13 2 19L15 29" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" /></svg></span> Designer.</h2><span className="handwritten mobile-hero-note" aria-hidden="true">brand → systems</span><span className="handwritten hero-note">brand <span className="hero-note-divider" aria-hidden="true">→</span> systems<br /><svg viewBox="0 0 120 60" fill="none" aria-hidden="true"><path d="M112 5Q72 53 8 44m13-9L6 44l13 11" /></svg></span></div><p className="hero-description">{site.intro}</p><Link className="text-link" href="#work">Explore the work <Arrow direction="down" /></Link></div>
       <FeaturedReel projects={projects.filter(project => Boolean(project.video)).map(toProjectPreview)} />
       <div className="hero-bottomline"><span>Editorial. Cinematic. Precise.</span><span>Digital products / AI workflows / Creative technology</span><span aria-hidden="true"><Arrow direction="down" /></span></div>
     </section>

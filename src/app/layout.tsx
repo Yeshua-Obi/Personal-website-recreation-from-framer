@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { MotionScene } from "@/components/motion";
 import { SiteHeader } from "@/components/header";
-import { SiteFooter } from "@/components/site-ui";
+import { SiteFooter } from "@/components/site-sections";
 import { description, getSiteUrl, siteName } from "@/lib/site";
-import site from "@/content/site.json";
+import { getSiteContent } from "@/lib/content";
 import { JsonLd } from "@/components/json-ld";
 import { identitySchema, getPublicBase, socialImage } from "@/lib/seo";
 import "./globals.css";
@@ -16,27 +16,31 @@ const hand = localFont({ src: "../../node_modules/@fontsource/caveat/files/cavea
 const siteUrl = getSiteUrl();
 const publicBase = getPublicBase();
 
-export const metadata: Metadata = {
-  metadataBase: publicBase ? new URL(publicBase) : undefined,
-  title: { default: "Yeshua Obi — Brand & Systems Designer in Lagos", template: "%s — Yeshua Obi" },
-  description,
-  authors: [{ name: site.name }],
-  robots: { index: Boolean(siteUrl), follow: Boolean(siteUrl) },
-  verification: process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : undefined,
-  openGraph: { type: "website", siteName, locale: "en_NG", title: "Yeshua Obi — Brand & Systems Designer in Lagos", description, images: [socialImage()], ...(publicBase ? { url: publicBase } : {}) },
-  twitter: { card: "summary_large_image", title: "Yeshua Obi — Brand & Systems Designer in Lagos", description, images: [socialImage()] },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSiteContent();
+  return {
+    metadataBase: publicBase ? new URL(publicBase) : undefined,
+    title: { default: "Yeshua Obi — Brand & Systems Designer in Lagos", template: "%s — Yeshua Obi" },
+    description,
+    authors: [{ name: site.name }],
+    robots: { index: Boolean(siteUrl), follow: Boolean(siteUrl) },
+    verification: process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : undefined,
+    openGraph: { type: "website", siteName, locale: "en_NG", title: "Yeshua Obi — Brand & Systems Designer in Lagos", description, images: [socialImage()], ...(publicBase ? { url: publicBase } : {}) },
+    twitter: { card: "summary_large_image", title: "Yeshua Obi — Brand & Systems Designer in Lagos", description, images: [socialImage()] },
+  };
+}
 
 export const viewport: Viewport = { themeColor: "#fefcf6" };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const site = await getSiteContent();
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${sans.variable} ${mono.variable} ${hand.variable}`}>
       <body>
-        <JsonLd data={identitySchema()} />
+        <JsonLd data={identitySchema(site)} />
         <a href="#main" className="skip-link">Skip to content</a>
         <MotionScene>
-          <SiteHeader />
+          <SiteHeader identity={{ displayName: site.displayName, tagline: site.tagline, mark: site.mark }} />
           {children}
           <SiteFooter />
         </MotionScene>

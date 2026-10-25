@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { isSanityImage } from "@/lib/image-variants";
 import { projectHref, type PreviewProject } from "@/lib/projects";
 import { mediaUrl, previewUrl } from "@/lib/media";
 import { useMotion } from "./motion";
@@ -51,7 +52,7 @@ export function ProjectPreview({ project, index, featured = false, active = true
         <span className="media-index" aria-hidden="true">{String(index + 1).padStart(2,"0")} / {project.date?.slice(0,4)}</span>
         <span className="media-placeholder" aria-hidden="true"><span className="placeholder-title">{project.title}</span><Arrow /></span>
         {shownSlides.map((source, slide) => <div key={source} className="preview-slide" style={{ "--slide": slide, "--slides": shownSlides.length } as CSSProperties}>
-          <Image src={mediaUrl(source)} alt="" fill sizes={featured ? "(max-width: 600px) 90vw, (max-width: 1200px) 45vw, 40vw" : "(max-width: 600px) 90vw, (max-width: 1000px) 45vw, 30vw"} loading={featured && slide === 0 ? "eager" : "lazy"} fetchPriority={featured && slide === 0 ? "high" : "auto"} className="preview-image" unoptimized={mediaUrl(source).startsWith("https:")} onLoad={event => { event.currentTarget.style.visibility = "visible"; setImageReady(true); }} onError={event => { event.currentTarget.style.visibility = "hidden"; setImageError(true); }} />
+          <Image src={mediaUrl(source)} alt="" fill sizes={featured ? "(max-width: 600px) 90vw, (max-width: 1200px) 45vw, 40vw" : "(max-width: 600px) 90vw, (max-width: 1000px) 45vw, 30vw"} loading={featured && slide === 0 ? "eager" : "lazy"} fetchPriority={featured && slide === 0 ? "high" : "auto"} className="preview-image" unoptimized={mediaUrl(source).startsWith("https:") && !isSanityImage(mediaUrl(source))} onLoad={event => { event.currentTarget.style.visibility = "visible"; setImageReady(true); }} onError={event => { event.currentTarget.style.visibility = "hidden"; setImageError(true); }} />
         </div>)}
         {project.video && !failed && <video ref={video} src={activated ? previewUrl(project.video) : undefined} muted loop={!onComplete} playsInline preload="none" aria-hidden="true" tabIndex={-1} onEnded={active ? onComplete : undefined}
           onPlaying={() => setHasVideoFrame(true)} onError={() => { setFailed(true); setHasVideoFrame(false); }} className={hasVideoFrame ? "video-ready" : ""} />}

@@ -53,10 +53,10 @@ export function selectPublishedProjects(input: readonly Project[]): Project[] {
   const slugs = new Set<string>();
   return input.filter((project) => {
     const eligible = project.status === "published"
-      && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.slug)
-      && project.title.trim().length > 0
-      && project.description.trim().length > 0
-      && project.content.some((paragraph) => paragraph.trim().length > 0);
+      && typeof project.slug === "string" && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.slug)
+      && typeof project.title === "string" && project.title.trim().length > 0
+      && typeof project.description === "string" && project.description.trim().length > 0
+      && Array.isArray(project.content) && project.content.some((paragraph) => typeof paragraph === "string" && paragraph.trim().length > 0);
     if (!eligible || slugs.has(project.slug)) return false;
     slugs.add(project.slug);
     return true;

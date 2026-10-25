@@ -5,14 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "sanity dev",
-    "build": "sanity build",
+    "build": "sanity build && node prepare-hosting.mjs",
     "typecheck": "tsc --noEmit",
     "test": "node --test migration.test.mjs",
-    "deploy": "sanity deploy",
+    "deploy": "node deploy.mjs",
     "import:check": "node import-content.mjs --dry-run",
-    "import:content": "sanity exec import-content.mjs --with-user-token -- --apply"
+    "import:content": "node --env-file-if-exists=.env.local import-content.mjs --apply"
   },
   "dependencies": {
+    "@sanity/client": "8.11.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "sanity": "6.20.0",
@@ -22,5 +23,7 @@
     "@types/react": "^19.0.0",
     "typescript": "^5.9.0"
   },
-  "engines": { "node": ">=22.12" }
+  "engines": {
+    "node": ">=22.12"
+  }
 }

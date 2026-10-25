@@ -26,18 +26,18 @@ export function pageMetadata(title: string, summary: string, path: string): Meta
   };
 }
 
-export function identitySchema() {
+export function identitySchema(profile = site) {
   const origin = getSiteUrl();
   if (!origin) return undefined;
   return {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": "Person", "@id": `${origin}/#person`, name: site.displayName,
-        alternateName: [site.name, "Joshua Obi"], jobTitle: site.role, url: origin,
-        description, image: new URL(imageVariantUrl(mediaUrl(site.portrait), 960), origin).href,
+      { "@type": "Person", "@id": `${origin}/#person`, name: profile.displayName,
+        alternateName: [profile.name, "Joshua Obi"], jobTitle: profile.role, url: origin,
+        description, image: new URL(imageVariantUrl(mediaUrl(profile.portrait), 960), origin).href,
         homeLocation: { "@type": "Place", name: "Lagos, Nigeria" },
         knowsAbout: ["Brand strategy", "Brand identity design", "Digital product design", "AI workflows", "Visual storytelling"],
-        sameAs: site.socials.map(social => social.url) },
+        sameAs: profile.socials.map(social => social.url) },
       { "@type": "WebSite", "@id": `${origin}/#website`, name: siteName, url: origin,
         description, inLanguage: "en", publisher: { "@id": `${origin}/#person` } },
     ],

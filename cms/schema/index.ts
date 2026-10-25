@@ -29,7 +29,7 @@ const project = defineType({
     defineField({ name: "category", title: "Short discipline label", type: "string", group: "overview", validation: rule => rule.required() }),
     defineField({ name: "categories", title: "Collections", type: "array", group: "overview", of: [{ type: "string" }], options: { list: categories }, validation: rule => rule.required().min(1).unique() }),
     defineField({ name: "description", title: "Project summary", type: "text", rows: 5, group: "overview", validation: rule => rule.required() }),
-    defineField({ name: "content", title: "Full project narrative", ...paragraphs(), group: "story", validation: rule => rule.required().min(1) }),
+    defineField({ name: "content", title: "Story paragraphs", ...paragraphs(), group: "story", description: "Use these paragraphs for a simple story, or add structured story sections below." }),
     defineField({ name: "sections", title: "Story sections", type: "array", group: "story", of: [defineArrayMember({ type: "object", fields: [
       defineField({ name: "heading", title: "Section heading", type: "string", validation: rule => rule.required() }),
       defineField({ name: "paragraphs", title: "Paragraphs", ...paragraphs(), validation: rule => rule.required().min(1) }),
@@ -46,6 +46,12 @@ const project = defineType({
     defineField({ name: "date", title: "Project date", type: "date", group: "credits" }),
     defineField({ name: "sourceUrl", title: "Original case study", type: "url", group: "credits", readOnly: true }),
   ],
+  validation: rule => rule.custom(document => {
+    const hasCopy = (value: unknown) => Array.isArray(value) && value.some(paragraph => typeof paragraph === "string" && paragraph.trim());
+    const sections = Array.isArray(document?.sections) ? document.sections : [];
+    return document?.status !== "published" || hasCopy(document?.content) || sections.some(section => section && hasCopy(section.paragraphs))
+      ? true : "Add story paragraphs or a story section before publishing the project.";
+  }),
   orderings: [{ title: "Website order", name: "websiteOrder", by: [{ field: "sortOrder", direction: "asc" }] }],
   preview: { select: { title: "title", subtitle: "category", media: "image" } },
 });

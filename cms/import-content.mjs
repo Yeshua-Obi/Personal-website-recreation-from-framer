@@ -52,9 +52,13 @@ if (!process.argv.includes("--apply")) {
   process.exit(0);
 }
 
-const { getCliClient } = await import("sanity/cli");
-const client = getCliClient({ apiVersion: "2025-02-19" }).withConfig({ useCdn: false });
-if (!client.config().token) throw new Error("Run through sanity exec --with-user-token using the owner's authenticated project.");
+if (!process.env.SANITY_AUTH_TOKEN) throw new Error("Add the dedicated project's SANITY_AUTH_TOKEN in secure environment settings before importing.");
+const { createClient } = await import("@sanity/client");
+const client = createClient({
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || "dntp46vk",
+  dataset: process.env.SANITY_STUDIO_DATASET || "production",
+  apiVersion: "2025-02-19", useCdn: false, token: process.env.SANITY_AUTH_TOKEN,
+});
 const ids = documents.flatMap(document => [document._id, `drafts.${document._id}`]);
 const existing = new Set(await client.fetch("*[_id in $ids]._id", { ids }, { perspective: "raw" }));
 const pending = documents.filter(document => !existing.has(document._id) && !existing.has(`drafts.${document._id}`));
@@ -85,8 +89,11 @@ for (const key of needed) {
 }
 const image = (source, alt, key) => ({ _type: "image", ...(key ? { _key: key } : {}), alt, asset: uploaded.get(assetKey(source)) });
 const file = (source, preview = false) => ({ _type: "file", asset: uploaded.get(assetKey(source, preview)) });
+// Preserve edits/drafts created while media uploads were in progress too.
+const current = new Set(await client.fetch("*[_id in $ids]._id", { ids }, { perspective: "raw" }));
+const writable = pending.filter(document => !current.has(document._id) && !current.has(`drafts.${document._id}`));
 let transaction = client.transaction();
-for (const document of pending) {
+for (const document of writable) {
   if (document._type === "siteSettings") {
     document.portrait = image(site.portrait, `${site.displayName}, ${site.role}`);
     document.mark = image(site.mark, `${site.displayName} logo`);
@@ -99,5 +106,5 @@ for (const document of pending) {
   }
   transaction = transaction.createIfNotExists(document);
 }
-await transaction.commit();
-console.log(`Imported ${pending.length} documents. Existing documents and drafts were not overwritten.`);
+if (writable.length) await transaction.commit();
+console.log(`Imported ${writable.length} documents. Existing documents and drafts were not overwritten.`);

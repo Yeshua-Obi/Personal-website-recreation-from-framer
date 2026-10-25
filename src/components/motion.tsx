@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import site from "@/content/site.json";
 import { mediaUrl } from "@/lib/media";
 import { CursorFollower } from "./cursor-follower";
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
@@ -115,7 +114,7 @@ export function MotionScene({ children }: { children: ReactNode }) {
   );
 }
 
-export function MagneticLogo() {
+export function MagneticLogo({ source }: { source: string }) {
   const { enabled } = useMotion();
   const mark = useRef<HTMLSpanElement>(null);
   const reset = () => {
@@ -132,7 +131,7 @@ export function MagneticLogo() {
         mark.current?.style.setProperty("--magnet-x", `${(event.clientX - box.left - box.width / 2) * 0.16}px`);
         mark.current?.style.setProperty("--magnet-y", `${(event.clientY - box.top - box.height / 2) * 0.16}px`);
       }} onPointerLeave={reset} onBlur={reset}>
-      <span ref={mark} className="brand-mark" aria-hidden="true"><Image src={mediaUrl(site.mark)} alt="" width={42} height={64} sizes="42px" /></span>
+      <span ref={mark} className="brand-mark" aria-hidden="true"><Image src={mediaUrl(source)} alt="" width={42} height={64} sizes="42px" /></span>
     </Link>
   );
 }

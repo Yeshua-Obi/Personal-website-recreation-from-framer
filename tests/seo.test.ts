@@ -1,4 +1,4 @@
-import { test } from "node:test";
+import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
 import sitemap from "../src/app/sitemap";
 import robots from "../src/app/robots";
@@ -6,11 +6,18 @@ import { getPublishedProjects, projectHref } from "../src/lib/projects";
 import { categoryPageHref, projectCategories } from "../src/lib/project-categories";
 import { identitySchema, collectionSchema, projectSchema, breadcrumbSchema, pageMetadata } from "../src/lib/seo";
 
-test("configured-domain sitemap and crawler rules cover the real pages and only published projects", () => {
+const previousCms = { project: process.env.SANITY_PROJECT_ID, dataset: process.env.SANITY_DATASET };
+before(() => { delete process.env.SANITY_PROJECT_ID; delete process.env.SANITY_DATASET; });
+after(() => {
+  if (previousCms.project !== undefined) process.env.SANITY_PROJECT_ID = previousCms.project;
+  if (previousCms.dataset !== undefined) process.env.SANITY_DATASET = previousCms.dataset;
+});
+
+test("configured-domain sitemap and crawler rules cover the real pages and only published projects", async () => {
   const previous = process.env.SITE_URL;
   process.env.SITE_URL = "https://portfolio.test";
   try {
-    const entries = sitemap();
+    const entries = await sitemap();
     const expected = ["", "/portfolio", "/about", "/manual", "/contact", ...projectCategories.map(category => categoryPageHref(category.slug)), ...getPublishedProjects().map(project => projectHref(project.slug))];
     assert.deepEqual(entries.map(entry => entry.url), expected.map(path => `https://portfolio.test${path}`));
     assert.deepEqual(robots(), { rules: { userAgent: "*", allow: "/" }, sitemap: "https://portfolio.test/sitemap.xml" });
@@ -43,11 +50,11 @@ test("page metadata and structured entities reference the configured launch doma
   }
 });
 
-test("unset deployment domain keeps local development out of search results", () => {
+test("unset deployment domain keeps local development out of search results", async () => {
   const previous = process.env.SITE_URL;
   delete process.env.SITE_URL;
   try {
-    assert.deepEqual(sitemap(), []);
+    assert.deepEqual(await sitemap(), []);
     assert.deepEqual(robots(), { rules: { userAgent: "*", disallow: "/" } });
   } finally {
     if (previous !== undefined) process.env.SITE_URL = previous;

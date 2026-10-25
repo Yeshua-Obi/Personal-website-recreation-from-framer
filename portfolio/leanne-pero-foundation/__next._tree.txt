@@ -1,8 +1,8 @@
-:HL["/Personal-website-recreation-from-framer/_next/static/chunks/3g4fuybmxgffb.css","style"]
+:HL["/Personal-website-recreation-from-framer/_next/static/chunks/12r00ov8n0mx4.css","style"]
 :HL["/Personal-website-recreation-from-framer/_next/static/media/caveat_latin_400_normal.p.3r_2tlsk65eum.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Personal-website-recreation-from-framer/_next/static/media/ibm_plex_mono_latin_400_normal.p.3xdfs0-p_zi4c.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Personal-website-recreation-from-framer/_next/static/media/inter_latin_400_normal-s.p.2qdljeg3s-lsl.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"slug","t":"d","k":"leanne-pero-foundation","s":["category"]},"h":65632,"c":"$Q3"}]]
 1:[["children",{"s":"portfolio","h":131168,"c":"$Q2"}]]
-0:{"b":"F-3bpo3OuV1gsjmq-Nix-","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
+0:{"b":"Xx76W5P8XNY84Q2962xv-","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}

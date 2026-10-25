@@ -39,6 +39,8 @@ CF_PAGES_URL=https://yeshua-obi-portfolio.pages.dev npm run build:static
 CLOUDFLARE_ACCOUNT_ID=4cc9c7cf9ced4d7ddfbd94fb29a84342 npx wrangler pages deploy out --project-name yeshua-obi-portfolio --branch main
 ```
 
+The earlier `yeshua-obi-portfolio-preview.pages.dev` address forwards to this personal-account deployment, preserving paths and query strings. That older project serves redirects only.
+
 Cloudflare's Git integration returned installation error 8000011 during setup. Automatic GitHub deployments are not configured. Direct-upload projects cannot convert to Git integration; resolve that connection and create a separate Git-integrated production project before configuring automatic CMS-triggered builds.
 
 For the future Git-integrated project, connect this repository's `main` branch in Cloudflare Pages:

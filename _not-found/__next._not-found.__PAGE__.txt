@@ -1,57 +1,61 @@
 1:"$Sreact.fragment"
-2:"/Personal-website-recreation-from-framer/_next/static/chunks/0y2b0yucoo5wx.js"
-3:"/Personal-website-recreation-from-framer/_next/static/chunks/22lvxjb58fwas.js"
-4:I[43494,["$2","$3"],"MotionScene"]
-5:I[93963,["$2","$3"],"SiteHeader"]
-6:"/Personal-website-recreation-from-framer/_next/static/chunks/0umf92h1sb77c.js"
-7:I[39756,["$6"],"default"]
-8:I[37457,["$6"],"default"]
-9:I[22016,["$2","$3"],""]
-a:I[49827,["$2","$3"],"SiteNavigation"]
-14:"ViewportBoundary"
-15:I[97367,["$6"],"$14"]
-16:"MetadataBoundary"
-17:I[97367,["$6"],"$16"]
-18:"$Sreact.suspense"
-:HL["/Personal-website-recreation-from-framer/_next/static/chunks/08n8q39w915_a.css","style"]
-c:X
-f:X
-f:C
-10:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","main",null,{"id":"main","className":"not-found shell","children":[["$","p",null,{"className":"eyebrow","children":"404 / NO SIGNAL"}],["$","h1",null,{"children":["This channel",["$","br",null,{}],"is off air."]}],["$","p",null,{"children":"The page you’re looking for isn’t available."}],["$","$L9",null,{"className":"text-link","href":"/","children":["Back to the homepage ","$L11"]}]]}],null,"$L12"]}],"p":"$@13","v":null,"s":"$c"}}]]
-d:[["children",{"s":"/_not-found","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L7",null,{"parallelRouterKey":"children","template":["$","$L8",null,{}]}]]}],"p":"$@e","v":"$f","s":"$c"},"c":"$Q10"}]]
-0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/Personal-website-recreation-from-framer/_next/static/chunks/08n8q39w915_a.css","precedence":"next"}],["$","script","script-0",{"src":"/Personal-website-recreation-from-framer/_next/static/chunks/0y2b0yucoo5wx.js","async":true}],["$","script","script-1",{"src":"/Personal-website-recreation-from-framer/_next/static/chunks/22lvxjb58fwas.js","async":true}]],["$","html",null,{"lang":"en","data-scroll-behavior":"smooth","children":["$","body",null,{"children":[["$","a",null,{"href":"#main","className":"skip-link","children":"Skip to content"}],["$","$L4",null,{"children":[["$","$L5",null,{}],["$","$L7",null,{"parallelRouterKey":"children","template":["$","$L8",null,{}],"notFound":[["$","main",null,{"id":"main","className":"not-found shell","children":[["$","p",null,{"className":"eyebrow","children":"404 / NO SIGNAL"}],["$","h1",null,{"children":["This channel",["$","br",null,{}],"is off air."]}],["$","p",null,{"children":"The page you’re looking for isn’t available."}],["$","$L9",null,{"className":"text-link","href":"/","children":["Back to the homepage ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}]]}],[]]}],["$","footer",null,{"className":"site-footer brand-grain shell","style":{"--grain-image":"url(\"/Personal-website-recreation-from-framer/media/framer-grain-still.png\")"},"children":[["$","div",null,{"className":"footer-signoff","children":[["$","$L9",null,{"href":"/about","className":"footer-wordmark","children":["Yeshua Obi",["$","span",null,{"children":["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]}]]}],["$","p",null,{"children":["Brand & Systems Designer.",["$","br",null,{}],"A person before a portfolio."]}]]}],["$","div",null,{"className":"footer-bottom","children":[["$","p",null,{"children":["© ",2026," Yeshua Obi / Lagos, Nigeria"]}],["$","div",null,{"className":"social-links","children":[["$","a","Behance",{"href":"https://www.behance.net/joshuaobi","target":"_blank","rel":"noopener noreferrer","children":["Behance"," ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}],["$","a","Instagram",{"href":"https://www.instagram.com/yeshuaobi","target":"_blank","rel":"noopener noreferrer","children":["Instagram"," ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}],["$","a","LinkedIn",{"href":"https://www.linkedin.com/in/yeshuaobi","target":"_blank","rel":"noopener noreferrer","children":["LinkedIn"," ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}],["$","a","YouTube",{"href":"https://www.youtube.com/@yeshuaobi","target":"_blank","rel":"noopener noreferrer","children":["YouTube"," ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}]]}],["$","a",null,{"href":"#main","className":"back-top","children":["Back to top ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(-45deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}],["$","$La",null,{"footer":true}]]}]]}]]}]]}]}]]}],"p":"$@b","v":null,"s":"$c"},"c":"$Qd"},"h":{"r":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L15",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#fefcf6"}]]}],["$","$L17",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$18",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Yeshua Obi — Brand & Systems Designer"}],["$","meta","1",{"name":"description","content":"Yeshua Obi (Joshua Adedotun Obi) is a Brand & Systems Designer working across digital products, visual identities, AI workflows, and creative technology. Explore his selected projects and case studies."}],"$L19","$L1a","$L1b","$L1c","$L1d","$L1e","$L1f","$L20","$L21","$L22","$L23","$L24","$L25","$L26","$L27","$L28","$L29","$L2a","$L2b","$L2c","$L2d","$L2e"]}]}],null]}],null]}],"p":"$@2f","v":null,"s":"$c"}},"a":"$@30","u":"$@31","b":"azcVulzi8swp3harqurQy"}
-32:I[97367,["$6"],"OutletBoundary"]
-34:I[27201,["$6"],"IconMark"]
-11:["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]
-12:["$","$L32",null,{"children":["$","$18",null,{"name":"Next.MetadataOutlet","children":"$@33"}]}]
-19:["$","meta","2",{"name":"author","content":"Joshua Adedotun Obi"}]
-1a:["$","meta","3",{"name":"robots","content":"noindex, nofollow"}]
-1b:["$","meta","4",{"property":"og:title","content":"Yeshua Obi — Brand & Systems Designer"}]
-1c:["$","meta","5",{"property":"og:description","content":"Yeshua Obi (Joshua Adedotun Obi) is a Brand & Systems Designer working across digital products, visual identities, AI workflows, and creative technology. Explore his selected projects and case studies."}]
-1d:["$","meta","6",{"property":"og:site_name","content":"Yeshua Obi"}]
-1e:["$","meta","7",{"property":"og:locale","content":"en_US"}]
-1f:["$","meta","8",{"property":"og:image","content":"http://localhost:3000/opengraph-image?33137c48b8c6c77f"}]
-20:["$","meta","9",{"property":"og:image:type","content":"image/png"}]
-21:["$","meta","10",{"property":"og:image:width","content":"1200"}]
-22:["$","meta","11",{"property":"og:image:height","content":"630"}]
-23:["$","meta","12",{"property":"og:image:alt","content":"Yeshua Obi — Brand & Systems Designer"}]
-24:["$","meta","13",{"property":"og:type","content":"website"}]
-25:["$","meta","14",{"name":"twitter:card","content":"summary_large_image"}]
-26:["$","meta","15",{"name":"twitter:title","content":"Yeshua Obi — Brand & Systems Designer"}]
-27:["$","meta","16",{"name":"twitter:description","content":"Yeshua Obi (Joshua Adedotun Obi) is a Brand & Systems Designer working across digital products, visual identities, AI workflows, and creative technology. Explore his selected projects and case studies."}]
-28:["$","meta","17",{"name":"twitter:image","content":"http://localhost:3000/opengraph-image?33137c48b8c6c77f"}]
-29:["$","meta","18",{"name":"twitter:image:alt","content":"Yeshua Obi — Brand & Systems Designer"}]
-2a:["$","meta","19",{"name":"twitter:image:type","content":"image/png"}]
-2b:["$","meta","20",{"name":"twitter:image:width","content":"1200"}]
-2c:["$","meta","21",{"name":"twitter:image:height","content":"630"}]
-2d:["$","link","22",{"rel":"icon","href":"/Personal-website-recreation-from-framer/icon.svg?icon.2z6awfpzd6-z5.svg","sizes":"any","type":"image/svg+xml"}]
-2e:["$","$L34","23",{}]
-c:300
-33:null
-31:true
-c:C
-30:0
-e:"$undefined"
-b:"$undefined"
-2f:"$undefined"
-13:"$undefined"
+2:"/Personal-website-recreation-from-framer/_next/static/chunks/44v1glx0vrijz.js"
+3:"/Personal-website-recreation-from-framer/_next/static/chunks/1ci974rt_uf3y.js"
+4:"/Personal-website-recreation-from-framer/_next/static/chunks/21cvb714mrz11.js"
+5:I[43494,["$2","$3","$4"],"MotionScene"]
+6:I[93963,["$2","$3","$4"],"SiteHeader"]
+7:I[39756,["$2","$3","$4"],"default"]
+8:I[37457,["$2","$3","$4"],"default"]
+9:I[22016,["$2","$3","$4"],""]
+a:I[38976,["$2","$3","$4"],"FooterGrain"]
+b:I[49827,["$2","$3","$4"],"SiteNavigation"]
+15:"ViewportBoundary"
+16:I[97367,["$2","$3","$4"],"$15"]
+17:"MetadataBoundary"
+18:I[97367,["$2","$3","$4"],"$17"]
+19:"$Sreact.suspense"
+:HL["/Personal-website-recreation-from-framer/_next/static/chunks/1idojktgs_miu.css","style"]
+d:X
+10:X
+10:C
+11:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","main",null,{"id":"main","className":"not-found shell","children":[["$","p",null,{"className":"eyebrow","children":"404 / NO SIGNAL"}],["$","h1",null,{"children":["This channel",["$","br",null,{}],"is off air."]}],["$","p",null,{"children":"The page you’re looking for isn’t available."}],"$L12"]}],null,"$L13"]}],"p":"$@14","v":null,"s":"$d"}}]]
+e:[["children",{"s":"/_not-found","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L7",null,{"parallelRouterKey":"children","template":["$","$L8",null,{}]}]]}],"p":"$@f","v":"$10","s":"$d"},"c":"$Q11"}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/Personal-website-recreation-from-framer/_next/static/chunks/1idojktgs_miu.css","precedence":"next"}],["$","script","script-0",{"src":"/Personal-website-recreation-from-framer/_next/static/chunks/44v1glx0vrijz.js","async":true}],["$","script","script-1",{"src":"/Personal-website-recreation-from-framer/_next/static/chunks/1ci974rt_uf3y.js","async":true}],["$","script","script-2",{"src":"/Personal-website-recreation-from-framer/_next/static/chunks/21cvb714mrz11.js","async":true}]],["$","html",null,{"lang":"en","data-scroll-behavior":"smooth","className":"S86bjq_variable _7l4JkG_variable f0EaNW_variable","children":["$","body",null,{"children":[null,["$","a",null,{"href":"#main","className":"skip-link","children":"Skip to content"}],["$","$L5",null,{"children":[["$","$L6",null,{}],["$","$L7",null,{"parallelRouterKey":"children","template":["$","$L8",null,{}],"notFound":[["$","main",null,{"id":"main","className":"not-found shell","children":[["$","p",null,{"className":"eyebrow","children":"404 / NO SIGNAL"}],["$","h1",null,{"children":["This channel",["$","br",null,{}],"is off air."]}],["$","p",null,{"children":"The page you’re looking for isn’t available."}],["$","$L9",null,{"className":"text-link","href":"/","children":["Back to the homepage ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}]]}],[]]}],["$","footer",null,{"className":"site-footer shell","children":[["$","$La",null,{}],["$","div",null,{"className":"footer-signoff","children":[["$","$L9",null,{"href":"/about","className":"footer-wordmark","children":["Yeshua Obi",["$","span",null,{"children":["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]}]]}],["$","p",null,{"children":["Brand & Systems Designer.",["$","br",null,{}],"A person before a portfolio."]}]]}],["$","div",null,{"className":"footer-bottom","children":[["$","p",null,{"children":["© ",2026," Yeshua Obi / Lagos, Nigeria"]}],["$","div",null,{"className":"social-links","children":[["$","a","Behance",{"href":"https://www.behance.net/joshuaobi","target":"_blank","rel":"noopener noreferrer","children":["Behance"," ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}],["$","a","Instagram",{"href":"https://www.instagram.com/yeshuaobi","target":"_blank","rel":"noopener noreferrer","children":["Instagram"," ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}],["$","a","LinkedIn",{"href":"https://www.linkedin.com/in/yeshuaobi","target":"_blank","rel":"noopener noreferrer","children":["LinkedIn"," ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}],["$","a","YouTube",{"href":"https://www.youtube.com/@yeshuaobi","target":"_blank","rel":"noopener noreferrer","children":["YouTube"," ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}]]}],["$","a",null,{"href":"#main","className":"back-top","children":["Back to top ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(-45deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}],["$","$Lb",null,{"footer":true}]]}]]}]]}]]}]}]]}],"p":"$@c","v":null,"s":"$d"},"c":"$Qe"},"h":{"r":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L16",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#fefcf6"}]]}],["$","$L18",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$19",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Yeshua Obi — Brand & Systems Designer in Lagos"}],"$L1a","$L1b","$L1c","$L1d","$L1e","$L1f","$L20","$L21","$L22","$L23","$L24","$L25","$L26","$L27","$L28","$L29","$L2a","$L2b","$L2c","$L2d","$L2e","$L2f","$L30","$L31"]}]}],null]}],"$L32"]}],"p":"$@33","v":null,"s":"$d"}},"a":"$@34","u":"$@35","b":"Odclt1zqxCSxLnd3zXwLY"}
+36:I[97367,["$2","$3","$4"],"OutletBoundary"]
+38:I[27201,["$2","$3","$4"],"IconMark"]
+12:["$","$L9",null,{"className":"text-link","href":"/","children":["Back to the homepage ",["$","svg",null,{"width":"20","height":"20","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.5","aria-hidden":"true","style":{"transform":"rotate(0deg)"},"children":["$","path",null,{"d":"M5 19 19 5M5 5h14v14"}]}]]}]
+13:["$","$L36",null,{"children":["$","$19",null,{"name":"Next.MetadataOutlet","children":"$@37"}]}]
+1a:["$","meta","1",{"name":"description","content":"Yeshua Obi is a Brand & Systems Designer in Lagos, Nigeria. Explore brand identities, digital products, AI workflows and visual storytelling projects."}]
+1b:["$","meta","2",{"name":"author","content":"Joshua Adedotun Obi"}]
+1c:["$","meta","3",{"name":"robots","content":"noindex, nofollow"}]
+1d:["$","meta","4",{"property":"og:title","content":"Yeshua Obi — Brand & Systems Designer in Lagos"}]
+1e:["$","meta","5",{"property":"og:description","content":"Yeshua Obi is a Brand & Systems Designer in Lagos, Nigeria. Explore brand identities, digital products, AI workflows and visual storytelling projects."}]
+1f:["$","meta","6",{"property":"og:url","content":"https://yeshua-obi.github.io/Personal-website-recreation-from-framer/"}]
+20:["$","meta","7",{"property":"og:site_name","content":"Yeshua Obi"}]
+21:["$","meta","8",{"property":"og:locale","content":"en_NG"}]
+22:["$","meta","9",{"property":"og:image","content":"https://yeshua-obi.github.io/Personal-website-recreation-from-framer/social/portfolio-card.png"}]
+23:["$","meta","10",{"property":"og:image:width","content":"1200"}]
+24:["$","meta","11",{"property":"og:image:height","content":"630"}]
+25:["$","meta","12",{"property":"og:image:alt","content":"Yeshua Obi — Brand & Systems Designer"}]
+26:["$","meta","13",{"property":"og:type","content":"website"}]
+27:["$","meta","14",{"name":"twitter:card","content":"summary_large_image"}]
+28:["$","meta","15",{"name":"twitter:title","content":"Yeshua Obi — Brand & Systems Designer in Lagos"}]
+29:["$","meta","16",{"name":"twitter:description","content":"Yeshua Obi is a Brand & Systems Designer in Lagos, Nigeria. Explore brand identities, digital products, AI workflows and visual storytelling projects."}]
+2a:["$","meta","17",{"name":"twitter:image","content":"https://yeshua-obi.github.io/Personal-website-recreation-from-framer/social/portfolio-card.png"}]
+2b:["$","meta","18",{"name":"twitter:image:alt","content":"Yeshua Obi — Brand & Systems Designer"}]
+2c:["$","meta","19",{"name":"twitter:image:width","content":"1200"}]
+2d:["$","meta","20",{"name":"twitter:image:height","content":"630"}]
+2e:["$","link","21",{"rel":"icon","href":"/Personal-website-recreation-from-framer/favicon.ico?favicon.17uniwfrolrx4.ico","sizes":"48x48","type":"image/x-icon"}]
+2f:["$","link","22",{"rel":"icon","href":"/Personal-website-recreation-from-framer/icon.png?icon.437-djbc_blct.png","sizes":"96x96","type":"image/png"}]
+30:["$","link","23",{"rel":"apple-touch-icon","href":"/Personal-website-recreation-from-framer/apple-icon.png?apple-icon.0z66hthgqun7t.png","sizes":"180x180","type":"image/png"}]
+31:["$","$L38","24",{}]
+32:["$","meta",null,{"name":"next-size-adjust","content":""}]
+d:300
+37:null
+35:true
+d:C
+34:0
+f:"$undefined"
+c:"$undefined"
+33:"$undefined"
+14:"$undefined"

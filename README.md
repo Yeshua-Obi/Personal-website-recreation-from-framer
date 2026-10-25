@@ -32,11 +32,11 @@ SITE_URL=https://your-real-domain.com npm run check:seo
 
 The selected final domain is `yeshuaobi.com`. Keep indexing disabled until the domain is registered, connected and verified.
 
-The temporary direct-upload project is `yeshua-obi-portfolio`, at `https://yeshua-obi-portfolio.pages.dev`, in the portfolio owner's personal Cloudflare account. `wrangler.json` pins that account so deployments target the intended owner. Its deployment requires authentication to that account:
+The temporary direct-upload project is `yeshua-obi-portfolio`, at `https://yeshua-obi-portfolio.pages.dev`, in the portfolio owner's personal Cloudflare account. `wrangler.json` selects that project; the supported `CLOUDFLARE_ACCOUNT_ID` deployment setting selects its owner. Authentication must belong to that personal account:
 
 ```sh
 CF_PAGES_URL=https://yeshua-obi-portfolio.pages.dev npm run build:static
-npx wrangler pages deploy out --project-name yeshua-obi-portfolio --branch main
+CLOUDFLARE_ACCOUNT_ID=4cc9c7cf9ced4d7ddfbd94fb29a84342 npx wrangler pages deploy out --project-name yeshua-obi-portfolio --branch main
 ```
 
 Cloudflare's Git integration returned installation error 8000011 during setup. Automatic GitHub deployments are not configured. Direct-upload projects cannot convert to Git integration; resolve that connection and create a separate Git-integrated production project before configuring automatic CMS-triggered builds.

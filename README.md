@@ -61,6 +61,8 @@ Project records are in `src/content/projects.json`; site identity and biography 
 
 The CMS connection follows hosting. Preserve project slugs, credits, disclosures, categories, ordering and homepage visibility during import. Use real provider project/dataset IDs and keep write credentials in authenticated CLI/build environments.
 
+The standalone editor schemas and repeatable migration are in [cms/](cms/README.md). Its type checks, migration tests and checksum-verified dry run work independently of provider credentials. The Sanity project, dataset, media import, deployed Studio, public-site data reads and automatic publishing still need connection and verification.
+
 ## Review deployment
 
 `npm run publish:review` publishes the separate GitHub Pages review from generated output to `gh-pages`. It preserves the source branch and working index. Review pages remain noindex. The production source is on `main`.

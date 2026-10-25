@@ -1,0 +1,73 @@
+import { defineArrayMember, defineField, defineType } from "sanity";
+
+const paragraphs = () => ({ type: "array", of: [defineArrayMember({ type: "text", rows: 4 })] });
+const image = (name: string, title: string) => defineField({ name, title, type: "image", options: { hotspot: true }, fields: [
+  defineField({ name: "alt", title: "Image description", type: "string", validation: rule => rule.required() }),
+] });
+const categories = [
+  { title: "Brand systems", value: "brand-systems" },
+  { title: "Digital products", value: "digital-products" },
+  { title: "AI workflows", value: "ai-workflows" },
+  { title: "Visual storytelling", value: "visual-storytelling" },
+];
+
+const project = defineType({
+  name: "project", title: "Project", type: "document",
+  groups: [
+    { name: "overview", title: "Overview", default: true },
+    { name: "story", title: "Story" },
+    { name: "media", title: "Images & films" },
+    { name: "credits", title: "Credits" },
+    { name: "publishing", title: "Publishing" },
+  ],
+  fields: [
+    defineField({ name: "title", title: "Project title", type: "string", group: "overview", validation: rule => rule.required() }),
+    defineField({ name: "slug", title: "Page address", type: "slug", group: "publishing", options: { source: "title", maxLength: 96 }, description: "Keep existing addresses unchanged so saved links continue to work.", validation: rule => rule.required().custom(value => !value?.current || /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.current) ? true : "Use lowercase words separated by hyphens.") }),
+    defineField({ name: "status", title: "Visibility", type: "string", group: "publishing", options: { list: [{ title: "Draft — hidden from the website", value: "draft" }, { title: "Published", value: "published" }], layout: "radio" }, initialValue: "draft", validation: rule => rule.required() }),
+    defineField({ name: "showOnHome", title: "Show on the homepage", type: "boolean", group: "publishing", initialValue: true, description: "Published projects can stay in Work without appearing on the homepage." }),
+    defineField({ name: "sortOrder", title: "Display order", type: "number", group: "publishing", validation: rule => rule.required().integer().min(0) }),
+    defineField({ name: "category", title: "Short discipline label", type: "string", group: "overview", validation: rule => rule.required() }),
+    defineField({ name: "categories", title: "Collections", type: "array", group: "overview", of: [{ type: "string" }], options: { list: categories }, validation: rule => rule.required().min(1).unique() }),
+    defineField({ name: "description", title: "Project summary", type: "text", rows: 5, group: "overview", validation: rule => rule.required() }),
+    defineField({ name: "content", title: "Full project narrative", ...paragraphs(), group: "story", validation: rule => rule.required().min(1) }),
+    defineField({ name: "sections", title: "Story sections", type: "array", group: "story", of: [defineArrayMember({ type: "object", fields: [
+      defineField({ name: "heading", title: "Section heading", type: "string", validation: rule => rule.required() }),
+      defineField({ name: "paragraphs", title: "Paragraphs", ...paragraphs(), validation: rule => rule.required().min(1) }),
+    ], preview: { select: { title: "heading" } } })] }),
+    defineField({ ...image("image", "Cover image"), group: "media", validation: rule => rule.required() }),
+    defineField({ name: "gallery", title: "Gallery", type: "array", group: "media", of: [defineArrayMember({ type: "image", options: { hotspot: true }, fields: [
+      defineField({ name: "alt", title: "Image description", type: "string", validation: rule => rule.required() }),
+    ] })] }),
+    defineField({ name: "video", title: "Silent gallery preview", type: "file", group: "media", options: { accept: "video/mp4,video/webm" }, description: "Use a short, compressed preview for the looping project card." }),
+    defineField({ name: "film", title: "Full project film", type: "file", group: "media", options: { accept: "video/*" } }),
+    defineField({ name: "accent", title: "Project colour", type: "string", group: "overview", validation: rule => rule.regex(/^#[0-9a-fA-F]{6}$/, { name: "hex colour" }) }),
+    defineField({ name: "services", title: "Services", type: "array", of: [{ type: "string" }], group: "credits" }),
+    ...["location", "role", "credit", "disclosure"].map(name => defineField({ name, title: name[0].toUpperCase() + name.slice(1), type: name === "disclosure" ? "text" : "string", group: "credits" })),
+    defineField({ name: "date", title: "Project date", type: "date", group: "credits" }),
+    defineField({ name: "sourceUrl", title: "Original case study", type: "url", group: "credits", readOnly: true }),
+  ],
+  orderings: [{ title: "Website order", name: "websiteOrder", by: [{ field: "sortOrder", direction: "asc" }] }],
+  preview: { select: { title: "title", subtitle: "category", media: "image" } },
+});
+
+const siteSettings = defineType({
+  name: "siteSettings", title: "About & contact", type: "document",
+  fields: [
+    ...["displayName", "name", "role", "tagline"].map(name => defineField({ name, title: ({ displayName: "Display name", name: "Full name", role: "Role", tagline: "Tagline" })[name], type: "string", validation: rule => rule.required() })),
+    defineField({ name: "intro", title: "Introduction", type: "text", rows: 4, validation: rule => rule.required() }),
+    defineField({ name: "biography", title: "Biography", ...paragraphs(), validation: rule => rule.required().min(1) }),
+    defineField({ name: "about", title: "About paragraphs", ...paragraphs() }),
+    defineField({ name: "personalNote", title: "Personal note", type: "text", rows: 3 }),
+    image("portrait", "Portrait"),
+    image("mark", "Logo"),
+    defineField({ name: "email", title: "Email", type: "email", validation: rule => rule.required() }),
+    defineField({ name: "phone", title: "Phone", type: "string" }),
+    defineField({ name: "socials", title: "Social links", type: "array", of: [defineArrayMember({ type: "object", fields: [
+      defineField({ name: "label", title: "Name", type: "string", validation: rule => rule.required() }),
+      defineField({ name: "url", title: "Address", type: "url", validation: rule => rule.required().uri({ scheme: ["https"] }) }),
+    ], preview: { select: { title: "label", subtitle: "url" } } })] }),
+  ],
+  preview: { prepare: () => ({ title: "About & contact" }) },
+});
+
+export const schemaTypes = [project, siteSettings];

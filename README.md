@@ -30,7 +30,18 @@ SITE_URL=https://your-real-domain.com npm run check:seo
 
 ## Cloudflare Pages
 
-Connect this repository's `main` branch in Cloudflare Pages:
+The selected final domain is `yeshuaobi.com`. Keep indexing disabled until the domain is registered, connected and verified.
+
+The temporary direct-upload project is `yeshua-obi-portfolio-preview`, at `https://yeshua-obi-portfolio-preview.pages.dev`. Its deployment requires an authenticated Cloudflare CLI:
+
+```sh
+CF_PAGES_URL=https://yeshua-obi-portfolio-preview.pages.dev npm run build:static
+npx wrangler pages deploy out --project-name yeshua-obi-portfolio-preview --branch main
+```
+
+Cloudflare's Git integration returned installation error 8000011 during setup. Automatic GitHub deployments are not configured. Direct-upload projects cannot convert to Git integration; resolve that connection and create a separate Git-integrated production project before configuring automatic CMS-triggered builds.
+
+For the future Git-integrated project, connect this repository's `main` branch in Cloudflare Pages:
 
 - Framework preset: None (the app exports a static site).
 - Root directory: repository root.
@@ -42,7 +53,7 @@ Connect this repository's `main` branch in Cloudflare Pages:
 
 The export generates clean URLs, caching/security headers, legacy project redirects and crawler rules. The large film originals remain on their existing public asset host until migration to owned CMS storage; complete that migration before retiring the Framer site.
 
-`wrangler.json` provides the intended Pages project name and output directory for a direct CLI deployment. Cloudflare authentication is required before creating/deploying that project.
+`wrangler.json` provides the temporary Pages project name and output directory for direct CLI deployments. Cloudflare authentication is required.
 
 ## Content
 

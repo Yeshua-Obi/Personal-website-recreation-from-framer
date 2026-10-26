@@ -613,7 +613,7 @@ a:hover, a:focus-visible { color: var(--hover-ink, var(--blue-ink)); }
 .brand-grain::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: var(--grain-image); background-repeat: repeat; background-size: 250px 350px; mix-blend-mode: multiply; opacity: .12; }
 .footer-grain { position: absolute; inset: -35px 0 0; left: 50%; width: 100vw; transform: translateX(-50%); z-index: -1; pointer-events: none; background-image: var(--grain-image); background-repeat: repeat; background-size: 250px 350px; mix-blend-mode: multiply; mask-image: linear-gradient(transparent, #000 25%); opacity: .08; }
 .about-opening .about-intro { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 42px 36px; padding-top: 48px; padding-bottom: 110px; }
-.about-identity { grid-column: 1 / 9; grid-row: 1; text-align: center; }
+.about-identity { grid-column: 4 / 9; grid-row: 1; text-align: left; }
 .about-identity .eyebrow { margin: 0 0 24px; }
 .about-opening .about-identity h1 { font-size: clamp(46px, 4.5vw, 68px); margin: 0; }
 .about-role { grid-column: 1 / 4; grid-row: 2; align-self: center; }

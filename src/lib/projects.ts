@@ -10,6 +10,7 @@ export type Project = {
   status: "draft" | "published";
   showOnHome?: boolean;
   sortOrder?: number;
+  orderRank?: string;
   content: string[];
   image?: string;
   video?: string | null;
@@ -52,7 +53,7 @@ export function projectSummary(project: Project): string {
 // A project needs real page content before it can appear anywhere publicly.
 export function selectPublishedProjects(input: readonly Project[]): Project[] {
   const slugs = new Set<string>();
-  return [...input].sort((a,b) => (a.sortOrder ?? Number.MAX_SAFE_INTEGER) - (b.sortOrder ?? Number.MAX_SAFE_INTEGER)).filter((project) => {
+  return [...input].sort((a,b) => a.orderRank && b.orderRank ? (a.orderRank < b.orderRank ? -1 : a.orderRank > b.orderRank ? 1 : 0) : (a.sortOrder ?? Number.MAX_SAFE_INTEGER) - (b.sortOrder ?? Number.MAX_SAFE_INTEGER)).filter((project) => {
     const eligible = project.status === "published"
       && typeof project.slug === "string" && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.slug)
       && typeof project.title === "string" && project.title.trim().length > 0

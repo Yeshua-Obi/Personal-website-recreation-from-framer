@@ -87,3 +87,13 @@ test("brief suggestions fill only missing fields and never infer credits or date
   assert.equal(result.category,'Digital products / AI workflows');
   assert.deepEqual(suggestMissingDetails({}),{});
 });
+
+test('drag ranking takes priority over legacy numbers in homepage and categories', async()=>{
+ const {selectHeroProjects,selectHomepageGrid}=await import('../src/lib/projects');
+ const {projectsInCategory}=await import('../src/lib/project-categories');
+ const projects=Array.from({length:6},(_,i)=>({...complete,slug:`ranked-${i}`,sortOrder:i,orderRank:`0|${i===0?'e':i===5?'f':String.fromCharCode(96+i)}:`,categories:['brand-systems' as const]}));
+ assert.deepEqual(selectPublishedProjects(projects).map(p=>p.slug),['ranked-1','ranked-2','ranked-3','ranked-4','ranked-0','ranked-5']);
+ assert.equal(selectHeroProjects(projects)[4].slug,'ranked-0');
+ assert.equal(selectHomepageGrid(projects)[4].slug,'ranked-0');
+ assert.equal(projectsInCategory(projects,'brand-systems')[4].slug,'ranked-0');
+});

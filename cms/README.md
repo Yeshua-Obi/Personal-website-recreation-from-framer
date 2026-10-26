@@ -32,7 +32,7 @@ Public website reads and deploy-on-publish must be connected and verified before
 
 ## Editing and priority
 
-Use **Project priority** to drag projects, or use the labelled up/down buttons, then **Save order**. The list shows consecutive positions, total/last/next positions, and draft visibility. Revision checks reject stale saves. Draft and published versions receive the same order without publishing draft content. New projects receive the next priority value automatically. Use **Projects** to edit cover, gallery, preview loop, full film, category membership and case-study text. The same ordered list feeds Work and each category. Use **Profile, images & contact** for the About portrait and logo.
+Drag projects directly in **Projects** using the handle beside the thumbnail. The order saves automatically. The list shows consecutive positions, total/last/next positions, and draft visibility. Draft and published versions receive the same rank without publishing draft content. New projects receive the next priority value automatically. Ordering uses Sanity’s orderable document list and orderRank throughout the website. Use **Projects** to edit cover, gallery, preview loop, full film, category membership and case-study text. The same ordered list feeds Work and each category. Use **Profile, images & contact** for the About portrait and logo.
 
 The homepage hero uses the first five homepage-eligible published projects, with video or animated-image previews. The grid uses the first complete multiple of three, capped at nine. Lower-priority projects remain visible in Work; More work leads there.
 

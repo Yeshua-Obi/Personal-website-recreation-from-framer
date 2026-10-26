@@ -2,16 +2,15 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { studioEnvironment } from "./environment";
 import { SuggestDetails } from "./project-suggestions";
-import ProjectOrder from "./project-order";
+import {orderableDocumentListDeskItem} from "@sanity/orderable-document-list";
 import { schemaTypes } from "./schema";
 
 export default defineConfig({
   name: "portfolio",
   title: "Yeshua Obi — Portfolio",
   ...studioEnvironment(),
-  tools: [{name:"priority", title:"Project priority", component:ProjectOrder}],
-  plugins: [structureTool({ structure: S => S.list().title("Portfolio").items([
-    S.documentTypeListItem("project").title("Projects"),
+  plugins: [structureTool({ structure: (S, context) => S.list().title("Portfolio").items([
+    orderableDocumentListDeskItem({type:"project",title:"Projects",id:"project",S,context}),
     S.listItem().title("Profile, images & contact").child(S.document().schemaType("siteSettings").documentId("site-settings")),
   ]) })],
   schema: { types: schemaTypes },

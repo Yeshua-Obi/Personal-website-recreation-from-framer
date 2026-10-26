@@ -1,5 +1,7 @@
+import {orderRankField, orderRankOrdering} from "@sanity/orderable-document-list";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { ProjectListPreview } from "../project-list-preview";
 import { ProjectPosition } from "../project-position";
 import { AssumptionField } from "../project-suggestions";
 
@@ -28,11 +30,12 @@ const project = defineType({
     return {sortOrder:(last ?? 0)+1,status:"draft",showOnHome:true};
   },
   fields: [
+    orderRankField({type:"project"}),
     defineField({ name: "title", title: "Project title", type: "string", group: "overview", validation: rule => rule.required() }),
     defineField({ name: "slug", title: "Page address", type: "slug", group: "publishing", options: { source: "title", maxLength: 96 }, description: "Keep existing addresses unchanged so saved links continue to work.", validation: rule => rule.required().custom(value => !value?.current || /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.current) ? true : "Use lowercase words separated by hyphens.") }),
     defineField({ name: "status", title: "Visibility", type: "string", group: "publishing", options: { list: [{ title: "Draft — hidden from the website", value: "draft" }, { title: "Published", value: "published" }], layout: "radio" }, initialValue: "draft", validation: rule => rule.required() }),
     defineField({ name: "showOnHome", title: "Show on the homepage", type: "boolean", group: "publishing", initialValue: true, description: "Published projects can stay in Work without appearing on the homepage." }),
-    defineField({ name: "sortOrder", title: "Project position", type: "number", group: "publishing", components:{input:ProjectPosition}, readOnly:true, description:"Use the Project priority tab to drag projects into position. New projects start after the last priority value.", validation: rule => rule.required().integer().min(0) }),
+    defineField({ name: "sortOrder", title: "Project position", type: "number", group: "publishing", components:{input:ProjectPosition}, readOnly:true, description:"Drag projects directly in the Projects list to change their position. New projects start after the last priority value.", validation: rule => rule.required().integer().min(0) }),
     defineField({ name: "brief", title: "Project brief for suggestions", type:"text", rows:8, group:"overview", description:"Describe the project in your own words, then choose Suggest missing details from the document actions. Suggestions use this text only; media analysis is not enabled." }),
     defineField({ name:"assumedFields", title:"Assumptions awaiting review", type:"array", of:[{type:"string"}], group:"overview", description:"These fields were suggested from your brief. Review them and remove each name when confirmed. This list never appears on the website." }),
     defineField({ name: "category", components:{field:AssumptionField}, title: "Short discipline label", type: "string", group: "overview", validation: rule => rule.required() }),
@@ -62,8 +65,9 @@ const project = defineType({
     return document?.status !== "published" || hasCopy(document?.content) || sections.some(section => section && hasCopy(section.paragraphs))
       ? true : "Add story paragraphs or a story section before publishing the project.";
   }),
-  orderings: [{ title: "Website order", name: "websiteOrder", by: [{ field: "sortOrder", direction: "asc" }] }],
-  preview: { select: { title: "title", subtitle: "category", media: "image" } },
+  orderings: [orderRankOrdering, { title: "Website order", name: "websiteOrder", by: [{ field: "sortOrder", direction: "asc" }] }],
+  components:{preview:ProjectListPreview},
+  preview: { select: { title: "title", subtitle: "category", media: "image", projectId:"_id", orderRank:"orderRank" } },
 });
 
 const siteSettings = defineType({

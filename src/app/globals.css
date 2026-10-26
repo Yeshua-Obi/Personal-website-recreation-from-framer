@@ -121,7 +121,7 @@ h1 > .muted, h2 > .muted { color: var(--blue); }
 .about-columns p { font-size: 14px; line-height: 1.9; margin: 0 0 30px; }
 .practice-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 28px 0 35px; }
 .practice-strip > .eyebrow { font-size: 12px; margin-bottom: 25px; }
-.practice-strip > div { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center; gap: 28px; font-size: clamp(16px, 2vw, 29px); letter-spacing: -.7px; }
+.practice-strip > div { display: grid; grid-template-columns: repeat(4, max-content); justify-content: space-between; align-items: center; gap: 28px; font-size: clamp(16px, 2vw, 29px); letter-spacing: -.7px; }
 .practice-strip a { display: flex; align-items: center; justify-content: flex-start; gap: 14px; min-height: 44px; }
 .practice-strip a > svg { color: var(--blue-ink); width: 18px; flex: 0 0 18px; transition: translate .25s ease; }
 .practice-strip a:active { color: var(--blue-ink); }

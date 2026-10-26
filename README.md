@@ -63,7 +63,7 @@ Project records are in `src/content/projects.json`; site identity and biography 
 
 The CMS connection follows hosting. Preserve project slugs, credits, disclosures, categories, ordering and homepage visibility during import. Use real provider project/dataset IDs and keep write credentials in authenticated CLI/build environments.
 
-The standalone editor and repeatable migration are in [cms/](cms/README.md), configured for the owner's real Sanity project `dntp46vk` and its public `production` dataset. The public website can read published content at build time with `SANITY_PROJECT_ID` and `SANITY_DATASET`, without a token. Leave those variables unset until media/documents are imported and verified. Type checks, publication/reader tests and the checksum-verified migration dry run run without provider credentials. The remote import, editor CORS/deployment, real-data activation and automatic publishing remain to be verified.
+The standalone editor and repeatable migration are in [cms/](cms/README.md), configured for the owner's real Sanity project `dntp46vk` and its public `production` dataset. The public website can read published content at build time with `SANITY_PROJECT_ID` and `SANITY_DATASET`, using an optional server-only SANITY_BUILD_TOKEN when anonymous reads do not return content. Keep that credential in secure build settings. Type checks, publication/reader tests and the checksum-verified migration dry run run without provider credentials. The import and editor CORS/deployment are complete. Real CMS content builds successfully. Automatic publishing still requires an authenticated deployment pipeline.
 
 ## Review deployment
 

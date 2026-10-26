@@ -9,6 +9,7 @@ export type Project = {
   description: string;
   status: "draft" | "published";
   showOnHome?: boolean;
+  sortOrder?: number;
   content: string[];
   image?: string;
   video?: string | null;
@@ -51,7 +52,7 @@ export function projectSummary(project: Project): string {
 // A project needs real page content before it can appear anywhere publicly.
 export function selectPublishedProjects(input: readonly Project[]): Project[] {
   const slugs = new Set<string>();
-  return input.filter((project) => {
+  return [...input].sort((a,b) => (a.sortOrder ?? Number.MAX_SAFE_INTEGER) - (b.sortOrder ?? Number.MAX_SAFE_INTEGER)).filter((project) => {
     const eligible = project.status === "published"
       && typeof project.slug === "string" && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.slug)
       && typeof project.title === "string" && project.title.trim().length > 0
@@ -77,4 +78,13 @@ export function getHomepageProjects(): Project[] {
 
 export function getProject(slug: string): Project | undefined {
   return getPublishedProjects().find((project) => project.slug === slug);
+}
+
+// The hero and grid share priority, but have independent size rules.
+export function selectHeroProjects(input: readonly Project[]): Project[] {
+  return selectHomepageProjects(input).slice(0, 5);
+}
+export function selectHomepageGrid(input: readonly Project[]): Project[] {
+  const eligible = selectHomepageProjects(input);
+  return eligible.slice(0, Math.min(9, Math.floor(eligible.length / 3) * 3));
 }

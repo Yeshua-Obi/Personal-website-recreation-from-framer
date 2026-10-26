@@ -62,3 +62,28 @@ test("deployment origin rejects paths, credentials, and development placeholders
     assert.throws(() => getSiteUrl(url));
   }
 });
+
+test("homepage grid contains complete rows up to nine and hero follows the same priority", async () => {
+  const {selectHomepageGrid, selectHeroProjects} = await import('../src/lib/projects');
+  for (let count=0;count<=15;count++) {
+    const input=Array.from({length:count},(_,index)=>({...complete,slug:`project-${index}`,sortOrder:count-index}));
+    const grid=selectHomepageGrid(input);
+    assert.equal(grid.length, Math.min(9,Math.floor(count/3)*3));
+    assert.equal(selectHeroProjects(input).length,Math.min(5,count));
+    if(count) assert.equal(selectHeroProjects(input)[0].slug,`project-${count-1}`);
+  }
+  const input=Array.from({length:8},(_,i)=>({...complete,slug:`case-${i}`,sortOrder:i,showOnHome:i!==0}));
+  assert.equal(selectHomepageGrid(input).length,6);
+  assert.equal(selectHeroProjects(input)[0].slug,'case-1');
+});
+
+test("brief suggestions fill only missing fields and never infer credits or dates", async () => {
+  const {suggestMissingDetails}=await import('../cms/suggestions');
+  const result=suggestMissingDetails({brief:'An AI automation workflow for a new website.',description:'Approved summary',categories:['brand-systems']});
+  assert.equal(result.description,undefined);
+  assert.equal(result.categories,undefined);
+  assert.equal(result.date,undefined);
+  assert.equal(result.credit,undefined);
+  assert.equal(result.category,'Digital products / AI workflows');
+  assert.deepEqual(suggestMissingDetails({}),{});
+});

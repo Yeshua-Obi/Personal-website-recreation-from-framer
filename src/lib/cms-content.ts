@@ -42,8 +42,8 @@ export function decodeCmsContent(value: unknown): PublishedContent {
 export const publishedContentQuery = `{
   "site": *[_type == "siteSettings" && _id == "site-settings"][0]{name,displayName,role,tagline,email,phone,intro,biography,about,personalNote,socials[]{label,url},"portrait":portrait.asset->url,"mark":mark.asset->url},
   "projects": *[_type == "project" && status == "published"] | order(sortOrder asc, slug.current asc){
-    "slug":slug.current,title,category,categories,description,status,showOnHome,content,sections[]{heading,paragraphs},services,location,date,role,credit,disclosure,sourceUrl,accent,
-    "updatedAt":_updatedAt,"image":image.asset->url,"video":video.asset->url,"film":film.asset->url,
+    "slug":slug.current,sortOrder,title,category,categories,description,status,showOnHome,content,sections[]{heading,paragraphs},services,location,date,role,credit,disclosure,sourceUrl,accent,
+    "updatedAt":_updatedAt,"image":image.asset->url,"video":video.asset->url,"film":coalesce(film.asset->url,filmUrl),
     "gallery":gallery[]{"src":asset->url,alt,"width":asset->metadata.dimensions.width,"height":asset->metadata.dimensions.height}
   }
 }`;

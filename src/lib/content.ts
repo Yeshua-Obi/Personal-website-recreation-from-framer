@@ -12,8 +12,9 @@ const getContent = cache(async (): Promise<PublishedContent> => {
   url.searchParams.set("query", publishedContentQuery);
   url.searchParams.set("perspective", "published");
   // Default Next fetch semantics take a fresh snapshot on each static build.
-  // No write credential is used by the public website.
-  const response = await fetch(url);
+  // Optional credentials stay in this server-only build module; static exports contain content only.
+  const token = process.env.SANITY_BUILD_TOKEN;
+  const response = await fetch(url, token ? {headers:{Authorization:`Bearer ${token}`}} : undefined);
   if (!response.ok) throw new Error(`Published Sanity content could not be read (${response.status}).`);
   const body = await response.json();
   return decodeCmsContent(body.result);

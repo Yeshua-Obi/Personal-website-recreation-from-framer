@@ -79,9 +79,11 @@ for (const document of pending) {
     if (source.film) needed.add(assetKey(source.film));
   }
 }
+const externalFilms = new Set(projects.filter(project => project.film).map(project => assetKey(project.film)));
 const uploaded = new Map();
 let count = 0;
 for (const key of needed) {
+  if (externalFilms.has(key)) continue;
   const asset = assets.get(key);
   const result = await client.assets.upload(asset.kind, createReadStream(asset.file), { filename: path.basename(asset.file) });
   uploaded.set(key, { _type: "reference", _ref: result._id });
@@ -102,7 +104,7 @@ for (const document of writable) {
     if (source.image) document.image = image(source.image, `${source.title} — project overview`);
     document.gallery = (source.gallery || []).map((item, index) => image(item.src, item.alt || `${source.title} — image ${index + 1}`, `image-${index}`));
     if (source.video) document.video = file(source.video, true);
-    if (source.film) document.film = file(source.film);
+    if (source.film) document.filmUrl = source.film;
   }
   transaction = transaction.createIfNotExists(document);
 }

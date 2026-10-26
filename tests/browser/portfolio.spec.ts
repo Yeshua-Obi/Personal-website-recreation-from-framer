@@ -172,3 +172,31 @@ test("cursor keeps blue hover ink behind links and disappears over the magnetic 
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(cursor).toHaveCSS("display", "none");
 });
+
+test('About portrait follows the pointer like the logo and respects leave, pause, touch and reduced motion', async ({page})=>{
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.goto('/about');
+  await expect(page.locator('.motion-scene')).toHaveAttribute('data-motion','on');
+  const portrait=page.locator('.magnetic-portrait');
+  const surface=portrait.locator('.portrait-surface');
+  await portrait.scrollIntoViewIfNeeded();
+  const box=await portrait.boundingBox();
+  if(!box) throw new Error('Portrait missing');
+  await page.mouse.move(box.x+box.width-12,box.y+box.height/2-15);
+  await expect.poll(()=>surface.evaluate(el=>parseFloat(el.style.getPropertyValue('--magnet-x')))).toBeGreaterThan(0);
+  await expect(portrait).toHaveAttribute('data-cursor','hide');
+  expect(await portrait.evaluate(el=>getComputedStyle(el).cursor)).not.toContain('pointer');
+  await page.mouse.move(5,5);
+  await expect(surface).toHaveCSS('--magnet-x','0px');
+  await portrait.dispatchEvent('pointermove',{pointerType:'touch',clientX:box.x+box.width-12,clientY:box.y+30});
+  await expect(surface).toHaveCSS('--magnet-x','0px');
+  await page.mouse.move(box.x+box.width-12,box.y+box.height/2);
+  await expect.poll(()=>surface.evaluate(el=>parseFloat(el.style.getPropertyValue('--magnet-x')))).toBeGreaterThan(0);
+  await page.getByRole('button',{name:'Pause motion',exact:true}).click();
+  await expect(surface).toHaveCSS('--magnet-x','0px');
+  await portrait.dispatchEvent('pointermove',{pointerType:'mouse',clientX:box.x+box.width-12,clientY:box.y+30});
+  await expect(surface).toHaveCSS('--magnet-x','0px');
+  await page.getByRole('button',{name:'Resume motion',exact:true}).click();
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await expect(surface).toHaveCSS('transform','none');
+});

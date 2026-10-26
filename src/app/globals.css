@@ -183,6 +183,8 @@ h1 > .muted, h2 > .muted { color: var(--blue); }
 .about-intro .action-link { margin-top: 20px; }
 .portrait { position: relative; aspect-ratio: .72; background: var(--soft); margin-top: 80px; transform: translate3d(0, calc(var(--parallax) * -.08), 0); }
 .portrait img { object-fit: cover; }
+.magnetic-portrait { background: transparent; }
+.portrait-surface { position: absolute; inset: 0; background: var(--soft); transform: translate3d(var(--magnet-x, 0px), var(--magnet-y, 0px), 0); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
 .portrait-label { position: absolute; bottom: -45px; left: 15px; font-size: 27px; transform: rotate(-4deg); }
 .about-philosophy { display: grid; grid-template-columns: 1fr 2fr; gap: 40px 80px; border-top: 1px solid var(--line); padding-top: 50px; padding-bottom: 100px; }
 .about-philosophy > .eyebrow { margin: 0; }
@@ -445,7 +447,7 @@ h1 > .muted, h2 > .muted { color: var(--blue); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .brand-mark, .portrait { transform: none !important; }
+  .brand-mark, .portrait, .portrait-surface { transform: none !important; }
   .preview-slide { opacity: 0; }
   .preview-slide:first-of-type { opacity: 1; }
 }

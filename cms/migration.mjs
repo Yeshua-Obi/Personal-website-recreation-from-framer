@@ -19,6 +19,8 @@ export function projectDocument(project, sortOrder) {
     _id: `project.${project.slug}`, _type: "project",
     slug: { _type: "slug", current: project.slug }, sortOrder,
     showOnHome: project.showOnHome !== false,
+    showInCarousel: project.showInCarousel === true,
+    showInHomeGrid: project.showInHomeGrid === true,
   };
   for (const field of copyFields) if (project[field] !== undefined) document[field] = structuredClone(project[field]);
   if (project.sections) document.sections = project.sections.map((section, index) => ({ _key: `section-${index}`, _type: "object", ...structuredClone(section) }));

@@ -27,14 +27,16 @@ const project = defineType({
   ],
   initialValue: async (_params, context) => {
     const last = await context.getClient({apiVersion:"2025-02-19"}).fetch<number | null>(' *[_type == "project"] | order(sortOrder desc)[0].sortOrder', {}, {perspective:"raw"});
-    return {sortOrder:(last ?? 0)+1,status:"draft",showOnHome:true};
+    return {sortOrder:(last ?? 0)+1,status:"draft",showInCarousel:false,showInHomeGrid:false};
   },
   fields: [
     orderRankField({type:"project"}),
     defineField({ name: "title", title: "Project title", type: "string", group: "overview", validation: rule => rule.required() }),
     defineField({ name: "slug", title: "Page address", type: "slug", group: "publishing", options: { source: "title", maxLength: 96 }, description: "Keep existing addresses unchanged so saved links continue to work.", validation: rule => rule.required().custom(value => !value?.current || /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.current) ? true : "Use lowercase words separated by hyphens.") }),
     defineField({ name: "status", title: "Visibility", type: "string", group: "publishing", options: { list: [{ title: "Draft — hidden from the website", value: "draft" }, { title: "Published", value: "published" }], layout: "radio" }, initialValue: "draft", validation: rule => rule.required() }),
-    defineField({ name: "showOnHome", title: "Show on the homepage", type: "boolean", group: "publishing", initialValue: true, description: "Published projects can stay in Work without appearing on the homepage." }),
+    defineField({name:"showOnHome",title:"Legacy homepage selection",type:"boolean",hidden:true}),
+    defineField({name:"showInCarousel",title:"Prioritise in homepage carousel",type:"boolean",group:"publishing",initialValue:false,description:"Chosen projects come first, in project priority order. Remaining places fill automatically from other published projects. Maximum six projects; if more than six are chosen, the six with highest priority appear."}),
+    defineField({name:"showInHomeGrid",title:"Prioritise in homepage grid",type:"boolean",group:"publishing",initialValue:false,description:"Chosen projects come first, in project priority order, then other published projects fill the remaining places. Grid capacity depends on total published projects: 6–8 gives 3 slots; 9–11 gives 6; 12–17 gives 9; 18+ gives 12. Lower-priority choices wait if the grid is full. Turn all choices off to use automatic priority order."}),
     defineField({ name: "sortOrder", title: "Project position", type: "number", group: "publishing", components:{input:ProjectPosition}, readOnly:true, description:"Drag projects directly in the Projects list to change their position. New projects start after the last priority value.", validation: rule => rule.required().integer().min(0) }),
     defineField({ name: "brief", title: "Project brief for suggestions", type:"text", rows:8, group:"overview", description:"Describe the project in your own words, then choose Suggest missing details from the document actions. Suggestions use this text only; media analysis is not enabled." }),
     defineField({ name:"assumedFields", title:"Assumptions awaiting review", type:"array", of:[{type:"string"}], group:"overview", description:"These fields were suggested from your brief. Review them and remove each name when confirmed. This list never appears on the website." }),

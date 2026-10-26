@@ -11,7 +11,7 @@ test("CMS snapshots preserve existing routes, ordering, credit and homepage visi
   const content = decodeCmsContent({ site, projects: records });
   assert.equal(content.projects.length, 11);
   assert.deepEqual(content.projects.map(project => project.slug), records.map(project => project.slug));
-  assert.equal(selectHomepageProjects(content.projects).length, 10);
+  assert.equal(selectHomepageProjects(content.projects).length, 11);
   assert.equal(content.projects.find(project => project.slug === "v320")?.showOnHome, false);
   assert.equal(content.site.email, site.email);
   assert.deepEqual(content.site.biography, site.biography);
@@ -56,7 +56,7 @@ test("activated website reads only the published perspective without write crede
   };
   try {
     assert.equal((await getPublishedProjects()).length, 11);
-    assert.equal((await getHomepageProjects()).length, 10);
+    assert.equal((await getHomepageProjects()).length, 11);
     assert.equal((await getSiteContent()).email, site.email);
     globalThis.fetch = async () => new Response("unavailable", { status: 503 });
     await assert.rejects(getPublishedProjects(), /could not be read/);

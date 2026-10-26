@@ -9,6 +9,8 @@ export type Project = {
   description: string;
   status: "draft" | "published";
   showOnHome?: boolean;
+  showInCarousel?: boolean;
+  showInHomeGrid?: boolean;
   sortOrder?: number;
   orderRank?: string;
   content: string[];
@@ -70,7 +72,8 @@ export function getPublishedProjects(): Project[] {
 }
 
 export function selectHomepageProjects(input: readonly Project[]): Project[] {
-  return selectPublishedProjects(input).filter(project => project.showOnHome !== false);
+  // Every published project is available for automatic backfill.
+  return selectPublishedProjects(input);
 }
 
 export function getHomepageProjects(): Project[] {
@@ -81,11 +84,24 @@ export function getProject(slug: string): Project | undefined {
   return getPublishedProjects().find((project) => project.slug === slug);
 }
 
-// The hero and grid share priority, but have independent size rules.
+// Manual choices come first; each group retains the shared project priority.
+function homepageOrder(input: readonly Project[], field: "showInCarousel" | "showInHomeGrid") {
+  const published = selectPublishedProjects(input);
+  return [...published.filter(project => project[field] === true), ...published.filter(project => project[field] !== true)];
+}
+
+export function homepageGridLimit(publishedCount: number): number {
+  // Reserve at least one complete row for Work. The fourth homepage row
+  // unlocks only when there are two more rows (18 projects) in the catalogue.
+  if (publishedCount >= 18) return 12;
+  if (publishedCount >= 12) return 9;
+  return Math.max(0, Math.floor((publishedCount - 3) / 3) * 3);
+}
+
 export function selectHeroProjects(input: readonly Project[]): Project[] {
-  return selectHomepageProjects(input).slice(0, 5);
+  return homepageOrder(input, "showInCarousel").slice(0, 6);
 }
 export function selectHomepageGrid(input: readonly Project[]): Project[] {
-  const eligible = selectHomepageProjects(input);
-  return eligible.slice(0, Math.min(9, Math.floor(eligible.length / 3) * 3));
+  const ordered = homepageOrder(input, "showInHomeGrid");
+  return ordered.slice(0, homepageGridLimit(ordered.length));
 }

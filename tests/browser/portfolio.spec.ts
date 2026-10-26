@@ -5,16 +5,16 @@ import projects from "../../src/content/projects.json";
 const published = projects.filter(project => project.status === "published");
 const origin = process.env.SITE_URL?.replace(/\/$/, "");
 
-test("home uses the real identity and keeps 9 distinct home projects and all 11 case studies", async ({ page, request }) => {
+test("home uses the real identity and keeps 6 distinct home projects and all 11 case studies", async ({ page, request }) => {
   const errors: string[] = [];
   page.on("pageerror", error => errors.push(error.message));
   await page.goto("/");
   await expect(page).toHaveTitle("Yeshua Obi — Brand & Systems Designer in Lagos");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(/Yeshua\s*Obi\./);
-  await expect(page.locator(".project-grid .project-link")).toHaveCount(9);
+  await expect(page.locator(".project-grid .project-link")).toHaveCount(6);
   await expect(page.locator(".television, .tv-controls, .scanlines")).toHaveCount(0);
   const hrefs = await page.locator(".project-grid .project-link").evaluateAll(nodes => nodes.map(node => node.getAttribute("href")));
-  expect(hrefs).toEqual(published.filter(project => project.showOnHome !== false).slice(0,9).map(project => `/portfolio/${project.slug}`));
+  expect(hrefs).toEqual(published.slice(0,6).map(project => `/portfolio/${project.slug}`));
   await expect(page.locator(".work-introduction .eyebrow")).toContainText(`${String(hrefs.length).padStart(2, "0")} projects`);
   for (const project of published) {
     const response = await request.get(`/portfolio/${project.slug}`);
